@@ -48,11 +48,18 @@ namespace 控馬達asdaA3 {
 	private: System::ComponentModel::IContainer^  components;
 	private: System::Windows::Forms::Timer^  timer1;
 			 int rpm_info;
+			 int ruu_indo;
 			 Thread^ motorThread;
 			 int rpm_value;
 	private: System::Windows::Forms::Button^  up;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Button^  disconect;
+	private: System::Windows::Forms::GroupBox^  groupBox1;
+	private: System::Windows::Forms::GroupBox^  groupBox2;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Button^  stop;
+	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Button^  down;
 	protected:
 
@@ -77,6 +84,14 @@ namespace 控馬達asdaA3 {
 			this->down = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->disconect = (gcnew System::Windows::Forms::Button());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->stop = (gcnew System::Windows::Forms::Button());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// comboBox1
@@ -108,7 +123,7 @@ namespace 控馬達asdaA3 {
 			// 
 			// up
 			// 
-			this->up->Location = System::Drawing::Point(127, 122);
+			this->up->Location = System::Drawing::Point(6, 21);
 			this->up->Name = L"up";
 			this->up->Size = System::Drawing::Size(75, 23);
 			this->up->TabIndex = 2;
@@ -118,7 +133,7 @@ namespace 控馬達asdaA3 {
 			// 
 			// down
 			// 
-			this->down->Location = System::Drawing::Point(208, 122);
+			this->down->Location = System::Drawing::Point(6, 50);
 			this->down->Name = L"down";
 			this->down->Size = System::Drawing::Size(75, 23);
 			this->down->TabIndex = 3;
@@ -129,7 +144,7 @@ namespace 控馬達asdaA3 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(329, 122);
+			this->label1->Location = System::Drawing::Point(104, 32);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(33, 12);
 			this->label1->TabIndex = 4;
@@ -145,22 +160,88 @@ namespace 控馬達asdaA3 {
 			this->disconect->UseVisualStyleBackColor = true;
 			this->disconect->Click += gcnew System::EventHandler(this, &MyForm::disconect_Click);
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->label2);
+			this->groupBox1->Controls->Add(this->stop);
+			this->groupBox1->Controls->Add(this->up);
+			this->groupBox1->Controls->Add(this->down);
+			this->groupBox1->Controls->Add(this->label1);
+			this->groupBox1->Location = System::Drawing::Point(213, 75);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(200, 100);
+			this->groupBox1->TabIndex = 6;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"speed";
+			this->groupBox1->Enter += gcnew System::EventHandler(this, &MyForm::groupBox1_Enter);
+			// 
+			// stop
+			// 
+			this->stop->Location = System::Drawing::Point(6, 71);
+			this->stop->Name = L"stop";
+			this->stop->Size = System::Drawing::Size(75, 23);
+			this->stop->TabIndex = 5;
+			this->stop->Text = L"stop";
+			this->stop->UseVisualStyleBackColor = true;
+			this->stop->Click += gcnew System::EventHandler(this, &MyForm::stop_Click);
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Controls->Add(this->button1);
+			this->groupBox2->Location = System::Drawing::Point(213, 212);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(200, 100);
+			this->groupBox2->TabIndex = 7;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"PRmode";
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(88, 35);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 1;
+			this->button2->Text = L"path1set";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(6, 35);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"ZERO";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(106, 60);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(33, 12);
+			this->label2->TabIndex = 6;
+			this->label2->Text = L"label2";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(490, 455);
+			this->Controls->Add(this->groupBox2);
+			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->disconect);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->down);
-			this->Controls->Add(this->up);
 			this->Controls->Add(this->SentComPort);
 			this->Controls->Add(this->comboBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -218,6 +299,52 @@ void motor_thread()
 		catch (TimeoutException^)
 		{
 			rpm_info = 99999;
+		}
+		///////////////////////////////RUU info/////////////////////////////////////////
+		unsigned char watch_data_ruu[8] = { 0,0,0,0,0,0,0,0 };
+		watch_data_make_ruu(watch_data);//執行watch_data_make命令生成函式
+		Marshal::Copy((IntPtr)watch_data, send_watch_code_arry, 0, 8);//複製 watch_data 內容進入 send_watch_code_arry
+		serialPort1->Write(send_watch_code_arry, 0, 8);//傳送 send_watch_code_arry 進入 serialPort1
+		Sleep(20);
+
+		///在 textBox3 中監控馬達回傳資訊的值///
+		unsigned char* p_recieve_ruu;
+		unsigned char recieve_ruu_char[9] = { 0 };
+
+		 ii = 0;
+		try
+		{
+			int lenl = 0;
+			lenl = serialPort1->BytesToRead;
+			p_recieve_ruu = recieve_ruu_char;//指標 p_recieve = recieve_rpm_char
+
+											   //當serialPort1有byte值,則傳送資料進入p_revieve
+			while (serialPort1->BytesToRead)
+			{
+				p_recieve_ruu[ii] = serialPort1->ReadChar();
+				ii++;
+				if (ii == lenl)
+				{
+					break;
+				}
+			}
+
+			unsigned int check_info1 = 256 * p_recieve_ruu[8] + p_recieve_ruu[7];//檢查算出crc是否正確
+																				   //如果crc正確,則算出rpm傳入textbox1
+			if (check_info1 == crc_chk(p_recieve_ruu, 7))
+			{
+				ruu_indo = p_recieve_ruu[6] * 256 + p_recieve_ruu[3];//高位元*256+低位元=轉速
+
+																	   //若rpm算出為負數,則用二補數計算
+				if (ruu_indo > 32767)
+				{
+					ruu_indo = -(65535 - ruu_indo + 1);
+				}
+			}
+		}
+		catch (TimeoutException^)
+		{
+			ruu_indo = 99999;
 		}
 	}
 }
@@ -280,9 +407,20 @@ void motor_thread()
 		watch_data[2] = 0x00;
 		watch_data[3] = 0x12;
 		watch_data[4] = 0x00;
-		watch_data[5] = 0x02;//09 02
+		watch_data[5] = 0x02;
 		watch_data[6] = 0x64;
 		watch_data[7] = 0x0e;
+	}
+	public:void watch_data_make_ruu(unsigned char watch_data[8])
+	{
+		watch_data[0] = 0x01;
+		watch_data[1] = 0x03; //讀取多組字組
+		watch_data[2] = 0x00;
+		watch_data[3] = 0x14;
+		watch_data[4] = 0x00;
+		watch_data[5] = 0x02;
+		watch_data[6] = 0x84;
+		watch_data[7] = 0x0f;
 	}
 		   ///RPM 矩陣 函式
 public:void rpm_send_data(unsigned char send_data[13], int rpm_value)
@@ -295,11 +433,12 @@ public:void rpm_send_data(unsigned char send_data[13], int rpm_value)
 	rpm_value >>= 8;
 	rpm_send_data[0] = rpm_value % 256;
 	rpm_value >>= 8;
+	////低位元
 	rpm_send_data[3] = rpm_value % 256;
 	rpm_value >>= 8;
 	rpm_send_data[2] = rpm_value % 256;
 	rpm_value >>= 8;
-
+	//高位元
 
 	send_data[0] = 0x01;//motor 機台號碼
 	send_data[1] = 0x10;//命令碼10 寫入多組字組
@@ -347,7 +486,7 @@ unsigned int crc_chk(unsigned char* data, unsigned char length)
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		
 		label1->Text = rpm_info.ToString();
-
+		label2->Text = ruu_indo.ToString();
 }
 private: System::Void up_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -369,6 +508,15 @@ private: System::Void down_Click(System::Object^  sender, System::EventArgs^  e)
 	Marshal::Copy((IntPtr)send_data, send_data_array1, 0, 13);//複製 send_data 內容進入 send_data_array
 	serialPort1->Write(send_data_array1, 0, 13);//傳送 send_data_array 進入 serialPort1
 }
+private: System::Void stop_Click(System::Object^  sender, System::EventArgs^  e) {
+	unsigned char send_data[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
+
+	rpm_value = 0;
+	rpm_send_data(send_data, rpm_value);
+	cli::array<System::Byte>^ send_data_array1 = gcnew cli::array< Byte >(13);//創造一個可控的矩陣 send_data_arry
+	Marshal::Copy((IntPtr)send_data, send_data_array1, 0, 13);//複製 send_data 內容進入 send_data_array
+	serialPort1->Write(send_data_array1, 0, 13);//傳送 send_data_array 進入 serialPort1
+}
 private: System::Void disconect_Click(System::Object^  sender, System::EventArgs^  e) {
 	cli::array<System::Byte>^ send_data_array = gcnew cli::array< Byte >(13);//創造一個可控的矩陣 send_data_array
 	rpm_value = 0;//停止馬達運動
@@ -384,5 +532,36 @@ private: System::Void disconect_Click(System::Object^  sender, System::EventArgs
 	this->serialPort1->Close();
 	MessageBox::Show("disconnect COM");
 }
+
+private: System::Void groupBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	
+	unsigned char send_data[8] = { 0,0,0,0,0,0,0,0};
+	unsigned char crc[2],l_crc,h_crc;
+	unsigned int return_value = 0;
+	send_data[0] = 0x01;
+	send_data[1] = 0x06; 
+	send_data[2] = 0x05;
+	send_data[3] = 0x0e;
+	send_data[4] = 0x00;
+	send_data[5] = 0x00;
+	send_data[6] = 0xe8;
+	send_data[7] = 0xc5;
+
+	return_value = crc_chk(send_data, 6);
+	cout << return_value<<endl;
+	l_crc = return_value % 256;
+	h_crc = return_value / 256;
+	//crc 放入 send_data
+	crc[0] = l_crc;
+	crc[1] = h_crc;
+	memcpy(&send_data[6], crc, 2);
+
+}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+
+}
+
 };
 }
